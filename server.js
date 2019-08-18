@@ -2,7 +2,9 @@
 // =============================================================
 const express = require("express");
 const path = require("path");
-const data = require("./app/data/friends.js")
+const apiRoutes = require("./routing/apiRoutes.js");
+const htmlRoutes = require("./routing/htmlRoutes.js");
+const data = require('./app/data/friends.js');
 
 // Sets up the Express App
 // =============================================================
@@ -14,5 +16,14 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 app.listen(PORT, function() {
-    console.log("App listening on PORT " + PORT);
+    console.log(`Server listening on ${PORT}\n Website: http://localhost:${PORT}`);
   });
+  
+apiRoutes();
+htmlRoutes();
+
+
+  module.exports = {
+      express,
+      app
+  };
