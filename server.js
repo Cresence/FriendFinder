@@ -16,12 +16,11 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 app.listen(PORT, function() {
-    console.log(`Server listening on ${PORT}\n Website: http://localhost:${PORT}`);
+    console.log(`Server listening on port: ${PORT}\n Website: http://localhost:${PORT}`);
   });
   
 apiRoutes();
 htmlRoutes();
-
 
   module.exports = {
       express,
