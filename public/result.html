@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Hot Restaurant</title>
+    <title>Friend Finder</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 	<script src="https://code.jquery.com/jquery.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
@@ -16,13 +16,12 @@
     <div class="container">
 
 		<div class="jumbotron">
-			<h1 class="text-center"><span class="glyphicon glyphicon-fire"></span> Hot Restaurant</h1>
+			<h1 class="text-center"><span class="glyphicon glyphicon-home"></span> Friend Finder</h1>
 			<hr>
-			<h2 class="text-center">Current Reservations and Waiting List</h2>
+			<h2 class="text-center">Find A Friend!</h2>
 			<br>
 
 			<div class="text-center">
-				<a href="/reserve"><button type="button" class="btn btn-lg btn-danger"><span class="glyphicon glyphicon-credit-card"></span> Make Reservation</button></a>
 				<a href="/"><button type="button" class="btn btn-lg btn-default"><span class="glyphicon glyphicon-home"></span></button></a>
 			</div>
 		</div>
@@ -33,17 +32,17 @@
 				<!-- Current Tables in Use -->
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						<h4 class="panel-title">Current Reservations</h4>
+						<h4 class="panel-title">Your Match</h4>
 					</div>
 					<div class="panel-body" id="tableSection">
 						<div class="card-body">
-							<ul id="tableList" class="list-group">
+							<ul id="friendMatch" class="list-group">
 								<!-- <li class="list-group-item mt-4">
 									<h2>Table #1</h2><hr>
 									<h2>ID: 87899992387</h2>
 									<h2>Name: steph</h2>
 									<h2>Email: dsk@jklfs.com</h2>
-									<h2>Phone: 2156677899</h2>
+									<h2>Trait: 2156677899</h2>
 								</li> -->
 								
 							</ul>	
@@ -52,62 +51,104 @@
 					</div>
 				</div>
 
-				<!-- Waiting List Panel -->
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<h4 class="panel-title">Waiting List</h4>
-					</div>
-					<div class="panel-body" id="waitlistSection">
-					</div>
-				</div>
-			</div>
-		</div>
-
-
 	    <footer class="footer">
 	      <div class="container">
 	      	<p>Control Panel</p>
-	        <p><a href="#" id="clear">Clear Table</a> | <a href="/api/tables">API Table Link</a> | <a href="/api/waitlist">API Wait List</a></p>
-	      </div>
+              <p><a href="/api/friends">API Friends Link</a> | <a href="https://github.com/Cresence/FriendFinder">Git Repo</a></p>
+            </div>
 	    </footer>
 
 	</div>
 	<script>
-		function displaygifInfo() {
+		function displayFriendMatch() {
 	
-	var queryURL = "/api/tables/";
+	let queryURL = "/api/friends/";
 	// Creating an AJAX call for the specific gif button being clicked
 	$.ajax({
 	  url: queryURL,
 	  method: "GET"
 	}).then(function(data) {
 
-	var dataCount = 0;
-	console.log(data);
-	  for (var i = 0; i < data.length; i++) {
-		dataCount++;
+    console.log(data);
+    const newEntry = data.pop();
+    console.log(newEntry);
+    let condition = parseInt(newEntry.score);
+    console.log(condition);
+    switch (condition) {
+        case condition === 2:
+    	    // Creating and storing a div tag
+		    let dataDiv1 = $("<div id=newData1>");
+
+		    // Creating a paragraph tag with the result item's data
+            
+		    let name1 = "Friend Name: " + data[0].friendName;
+            let trait1 = "Trait: " + data[0].trait;
+            let photo1 = $("<img src=" + data[2].photo + " alt='friendMatchPhoto>");
+
+		    let p1 = $("<li class='list-group-item mt-4'> ").html("<h4>" + name1 + "<br/>"+ trait1 + "<br/>"+ "Photo: " + "<br/>" + photo1);
+
+		    // Appending the paragraph and image tag to the gifDiv
+		    dataDiv1.append(p1);
+
+		    // Prependng the gifDiv to the HTML page in the "#gifs-appear-here" div
+            $("#friendMatch").prepend(dataDiv1);
+            break;
+        case condition = 3:
+            let dataDiv2 = $("<div id=newData2>");
+
+            // Creating a paragraph tag with the result item's data
+
+            let name2 = "Friend Name: " + data[2].friendName;
+            let trait2 = "Trait: " + data[2].trait;
+            let photo2 = $("<img src=" + data[2].photo + " alt='friendMatchPhoto>");
+
+            let p2 = $("<li class='list-group-item mt-4'> ").html("<h4>" + name2 + "<br/>"+ trait2 + "<br/>"+ "Photo: " + "<br/>" +  photo2);
+            
+            // Appending the paragraph and image tag to the gifDiv
+            dataDiv2.append(p2);
+            
+            // Prependng the gifDiv to the HTML page in the "#gifs-appear-here" div
+            $("#friendMatch").prepend(dataDiv2);
+            break;
+        case condition = 1:
+            let dataDiv3 = $("<div id=newData3>");
+
+            // Creating a paragraph tag with the result item's data
+                        
+            let name3 = "Friend Name: " + data[1].friendName;
+            let trait3 = "Trait: " + data[1].trait;
+            let photo3 = $("<img src=" + data[2].photo + " alt='friendMatchPhoto>");
+                        
+            let p3 = $("<li class='list-group-item mt-4'> ").html("<h4>" + name3 + "<br/>"+ trait3 + "<br/>"+ "Photo: " + "<br>" + photo3);
+            
+            // Appending the paragraph and image tag to the gifDiv
+            dataDiv3.append(p3);
+            
+            // Prependng the gifDiv to the HTML page in the "#gifs-appear-here" div
+            $("#friendMatch").prepend(dataDiv3);
+            break;
+            default:
+                let dataDiv = $("<div id=newData>");
+
+                let p = $("<li class='list-group-item mt-4'> ").html("Sorry, no matches found!");
+                
+                // Appending the paragraph and image tag to the gifDiv
+                dataDiv.append(p);
+
+                $("#friendMatch").prepend(dataDiv);
+    }
+
+
+    
+    
+    
+	//   for (let i = 0; i < data.length; i++) {
+	// 	dataCount++;
 		
-		// Creating and storing a div tag
-		var dataDiv = $("<div id=newData-" + dataCount + ">");
-
-		// Creating a paragraph tag with the result item's data
-		
-		let id = "ID: " + data[i].customerID;
-		let name = "Customer Name: " + data[i].customerName;
-		let email = "Customer Email: " + data[i].customerEmail;
-		let phone = "Phone: " + data[i].phoneNumber;
-
-		var p = $("<li class='list-group-item mt-4'> ").html("<h4>" +id + "<br/>"+ name + "<br/>"+ email + "<br/>"+ phone);
-
-		// Appending the paragraph and image tag to the gifDiv
-		dataDiv.append(p);
-
-		// Prependng the gifDiv to the HTML page in the "#gifs-appear-here" div
-		$("#tableList").prepend(dataDiv);
-	  }
+	//   }
   });
 }
-displaygifInfo();
+displayFriendMatch();
 	</script>
 </body>
 </html>

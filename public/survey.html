@@ -47,27 +47,27 @@
                             </div>
                             
                             <div class="form-group">
-                                <label for="ques1">Question 1</label>
+                                <label for="ques1">Question 1: Would you jump into battle to save your friends?</label>
                                 <select class="form-control" id="ques1">
-                                    <option>1 (Weak)</option>
-                                    <option>2 (Moderate)</option>
-                                    <option>3 (Strong)</option>    
+                                    <option>1 (Disagree)</option>
+                                    <option>2 (Neutral)</option>
+                                    <option>3 (Agree)</option>    
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="ques2">Question 2</label>
+                                <label for="ques2">Question 2: Is sacrificing 1 to save 100 right?</label>
                                 <select class="form-control" id="ques2">
-                                    <option>1 (Weak)</option>
-                                    <option>2 (Moderate)</option>
-                                    <option>3 (Strong)</option>    
+                                    <option>1 (Disagree)</option>
+                                    <option>2 (Neutral)</option>
+                                    <option>3 (Agree)</option>    
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="ques3">Question 3</label>
+                                <label for="ques3">Question 3: Are you more comfortable alone, or with a group?</label>
                                 <select class="form-control" id="ques3">
-                                    <option>1 (Weak)</option>
-                                    <option>2 (Moderate)</option>
-                                    <option>3 (Strong)</option>    
+                                    <option>1 (Disagree)</option>
+                                    <option>2 (Neutral)</option>
+                                    <option>3 (Agree)</option>    
                                 </select>
                             </div>
 
@@ -91,28 +91,34 @@
 	<script type="text/javascript">
         // Question: What does this code do?
         $("#add-btn").on("click", function(event) {
-          event.preventDefault();
-          var surveyInquiry = {
-            name: $("#name").val().trim(),
-            score: function() {
-                const arr = [];
-                const query1 = $('#ques1').val().trim();
-                const query2 = $('#ques1').val().trim();
-                const query3 = $('#ques1').val().trim();
-                arr.push(query1, query2, query3);
+            event.preventDefault();
+            const arr = [];
+            const query1 = $('#ques1').val().trim();
+            const query2 = $('#ques1').val().trim();
+            const query3 = $('#ques1').val().trim();
+            // arr.push(query1, query2, query3);
+            const newQuery1 = parseInt(query1.charAt(0)); 
+            const newQuery2 = parseInt(query2.charAt(0)); 
+            const newQuery3 = parseInt(query3.charAt(0));
+            let score = newQuery2;
+            console.log(score);
+            let surveyInquiry = {
+                name: $("#name").val().trim(),
+                score,
+                photo: $("#photo").val().trim()
+            };
 
-                console.log(arr);
-            },
-            photo: $("#photo").val().trim()
-          };
+          console.log(surveyInquiry.score);
     
           // Question: What does this code do??
           $.post("/api/friends", surveyInquiry)
-            .then(function(data) {
-              console.log("survey.html", data);
+            .then(function(friends) {
+              console.log("survey.html", friends);
             //   alert("Searching...");
             });
+            location.assign('/result');
         });
+
       </script>
 </body>
 </html>
