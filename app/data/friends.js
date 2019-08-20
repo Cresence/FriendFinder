@@ -16,4 +16,4 @@ let friends = [
     }
 ]
 
-module.exports = { data: friends };
+module.exports = friends;

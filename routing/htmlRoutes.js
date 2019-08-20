@@ -1,6 +1,4 @@
-const express = require('express');
 const path = require('path');
-const app = express();
 // const router = express.Router();
 
 // router.use(function timeLog (req, res, next) {
@@ -13,8 +11,14 @@ const app = express();
 //     console.log('-----\nhtmlRoutes function is being called.\n-----');
 // })
 
-const htmlRoutes = () => {
+    
+
+
+// module.exports = { htmlRoutes: router };
+module.exports = function(app) {
+
     app.get("/", function(req, res) {
+        console.log('htmlRoutes: Code Line 18 Being Ran');
         res.sendFile(path.join(__dirname, "../public/home.html"));
     });
     
@@ -23,11 +27,8 @@ const htmlRoutes = () => {
     });
 
     app.get("/result", function (req, res) {
-        res.sendFile(path.join(__dirname + "../public/result.html"));
-    })
+        res.sendFile(path.join(__dirname, "../public/result.html"));
+    });
 
     console.log('-----\nhtmlRoutes function is being called.\n-----');
-};
-
-// module.exports = { htmlRoutes: router };
-module.exports = htmlRoutes;
+}

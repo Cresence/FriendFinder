@@ -1,10 +1,11 @@
-const express = require('express');
-const app = express();
-const data = require('../app/data/friends.js');
+const friends = require('../app/data/friends.js');
 
 
-const apiRoutes = () => {
-    app.get("/api/friends", (req, res) => res.json(data));
+
+console.log(friends + ' apiRoutes.js-line:5');
+
+module.exports = function(app) {
+  app.get("/api/friends", (req, res) => res.json(friends));
 
     app.post("/api/friends", function(req, res) {
         // req.body hosts is equal to the JSON post sent from the user
@@ -17,14 +18,10 @@ const apiRoutes = () => {
       
         console.log(surveyInquiry);
       
-        data.push(surveyInquiry);
+        friends.push(surveyInquiry);
       
         res.json(surveyInquiry);
       });
 
     console.log('-----\napiRoutes function is being called.\n-----');
 }
-
-console.log(data);
-
-module.exports = apiRoutes;
