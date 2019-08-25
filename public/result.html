@@ -83,12 +83,14 @@
             
 		    let name1 = "Friend Name: " + data[0].friendName;
             let trait1 = "Trait: " + data[0].trait;
-            let photo1 = $("<img src=" + data[2].photo + " alt='friendMatchPhoto>");
+			let photo1 = $("<img>"); 
+			photo1.attr("src", data[0].photo);
 
-		    let p1 = $("<li class='list-group-item mt-4'> ").html("<h4>" + name1 + "<br/>"+ trait1 + "<br/>"+ "Photo: " + "<br/>" + photo1);
+		    let p1 = $("<li class='list-group-item mt-4'> ").html("<h4>" + name1 + "<br/>"+ trait1 + "<br/>"+ "Photo:");
 
 		    // Appending the paragraph and image tag to the gifDiv
-		    dataDiv1.append(p1);
+			dataDiv1.append(p1);
+			dataDiv1.append(photo1)
 
 		    // Prependng the gifDiv to the HTML page in the "#gifs-appear-here" div
             $("#friendMatch").prepend(dataDiv1);
@@ -100,12 +102,14 @@
 
             let name2 = "Friend Name: " + data[2].friendName;
             let trait2 = "Trait: " + data[2].trait;
-            let photo2 = $("<img src=" + data[2].photo + " alt='friendMatchPhoto>");
+			let photo2 = $("<img>"); 
+			photo2.attr("src", data[2].photo);
 
-            let p2 = $("<li class='list-group-item mt-4'> ").html("<h4>" + name2 + "<br/>"+ trait2 + "<br/>"+ "Photo: " + "<br/>" +  photo2);
+            let p2 = $("<li class='list-group-item mt-4'> ").html("<h4>" + name2 + "<br/>"+ trait2 + "<br/>"+ "Photo:");
             
             // Appending the paragraph and image tag to the gifDiv
-            dataDiv2.append(p2);
+			dataDiv2.append(p2);
+			dataDiv2.append(photo2)
             
             // Prependng the gifDiv to the HTML page in the "#gifs-appear-here" div
             $("#friendMatch").prepend(dataDiv2);
@@ -117,12 +121,14 @@
                         
             let name3 = "Friend Name: " + data[1].friendName;
             let trait3 = "Trait: " + data[1].trait;
-            let photo3 = $("<img src=" + data[2].photo + " alt='friendMatchPhoto>");
+			let photo3 = $("<img>"); 
+			photo3.attr("src", data[1].photo);
                         
-            let p3 = $("<li class='list-group-item mt-4'> ").html("<h4>" + name3 + "<br/>"+ trait3 + "<br/>"+ "Photo: " + "<br>" + photo3);
+            let p3 = $("<li class='list-group-item mt-4'> ").html("<h4>" + name3 + "<br/>"+ trait3 + "<br/>"+ "Photo:");
             
             // Appending the paragraph and image tag to the gifDiv
-            dataDiv3.append(p3);
+			dataDiv3.append(p3);
+			dataDiv3.append(photo3)
             
             // Prependng the gifDiv to the HTML page in the "#gifs-appear-here" div
             $("#friendMatch").prepend(dataDiv3);
