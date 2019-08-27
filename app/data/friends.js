@@ -2,17 +2,17 @@ let friends = [
     {
         friendName: "Gatts",
         trait: "Loyal",
-        photo: "./assets/guts.png"
+        photo: "/assets/guts.png"
     },
     {
         friendName: "Griffith",
         trait: "Leader",
-        photo: "./assets/griffith.png"
+        photo: "/assets/griffith.png"
     },
     {
         friendName: "Casca",
         trait: "Loving",
-        photo: "./assets/casca.png"
+        photo: "/assets/casca.png"
     }
 ]
 
